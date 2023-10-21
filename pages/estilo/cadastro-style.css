@@ -1,0 +1,3 @@
+#email[type=text], #senha[type="password"], #telefone[type="tel"] {
+    width: 400px;
+}
