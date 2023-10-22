@@ -1,11 +1,7 @@
 <?php
+include '../utils/logout.php';
 session_start();
-if (empty($_SESSION['user'])) {
-    echo "<script>
-        window.alert('Faça o login antes!')
-        window.location.href='../user/login.php';
-    </script>";
-}
+logout()
 ?>
 
 <!DOCTYPE html>

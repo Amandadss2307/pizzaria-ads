@@ -11,15 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = getUser($conn, $email);
 
         $userEmail = $user[2];
-        $userPassword = $user[4];
+        $userPassword = $user[3];
 
 
         if ($userPassword == $password) {
-            $newUser = [$user[1], $user[2], $user[3]];
+            $newUser = [$user[1], $user[2], $user[4], $user[5]];
 
             session_start();
 
-            $_SESSION['user.name'] = $newUser;
+            $_SESSION['user'] = $newUser;
 
             header('Location: ../../pages/pedidos/cadastro.php');
         }

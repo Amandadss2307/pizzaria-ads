@@ -1,7 +1,7 @@
 <?php
 function existUser(mysqli $conn, string $email): bool
 {
-    $select = "SELECT * FROM `clientes` WHERE email = '$email'";
+    $select = "SELECT * FROM `cliente` WHERE email = '$email'";
 
     $result = $conn->query($select);
 
@@ -14,7 +14,7 @@ function existUser(mysqli $conn, string $email): bool
 
 function getUser(mysqli $conn, string $email): array
 {
-    $select = "SELECT * FROM `clientes` WHERE email = '$email'";
+    $select = "SELECT * FROM `cliente` WHERE email = '$email'";
 
     $result = $conn->query($select);
 

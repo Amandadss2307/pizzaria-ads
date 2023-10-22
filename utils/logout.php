@@ -2,5 +2,5 @@
 function logout()
 {
     session_destroy();
-    header('Location: ../user/login.php');
+    header('Location: ../pages/user/login.php');
 }

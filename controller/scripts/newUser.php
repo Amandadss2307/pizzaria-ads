@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $message = '';
 
     if (!existUser($conn, $email)) {
-        $query = "INSERT INTO `clientes` (
-            `id_cliente`, `nome_completo`, `email`, `telefone`, `senha`
+        $query = "INSERT INTO `cliente` (
+            `id`, `nome`, `email`, `telefone`, `senha`
             ) VALUES (
                 NULL, '$nomeCompleto', '$email', '$telefone', '$senha'
             );";
