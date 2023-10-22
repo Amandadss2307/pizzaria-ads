@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 22-Out-2023 às 01:04
+-- Tempo de geração: 22-Out-2023 às 20:30
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.0.26
 
@@ -52,6 +52,46 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `senha` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `telefone` varchar(21) COLLATE utf8mb4_general_ci NOT NULL,
   `tipo_usuario` varchar(10) COLLATE utf8mb4_general_ci DEFAULT 'USER',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `nome`, `email`, `senha`, `telefone`, `tipo_usuario`) VALUES
+(1, 'awdawdawdawdwa', 'showdobts2605@gmail.com', 'dfbe9b84722f27c60aade2595f9f66da', '+5511992281382', 'USER');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `distribuidora`
+--
+
+DROP TABLE IF EXISTS `distribuidora`;
+CREATE TABLE IF NOT EXISTS `distribuidora` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `cnpj` int NOT NULL,
+  `endereco` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `telefone` int NOT NULL,
+  `id_cliente` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `noticia`
+--
+
+DROP TABLE IF EXISTS `noticia`;
+CREATE TABLE IF NOT EXISTS `noticia` (
+  `id` int NOT NULL,
+  `titulo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `data` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `img` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_cliente` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
