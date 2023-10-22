@@ -18,7 +18,7 @@ require '../../utils/initalSession.php';
 <body>
     <main>
         <h1>CADASTRO</h1>
-        <form action="../../controller/scripts/newUser.php" method="post">
+        <form action="../../controller/scripts/newUser.php" method="POST">
             <label for="nome-completo">Nome completo: </label>
             <input type="text" name="nome-completo" id="nome-completo" placeholder="Seu nome completo">
             <br><br>
