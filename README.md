@@ -6,6 +6,10 @@ Para iniciar o projeto importe o banco de dados que está em:
 /db/login.sql
 ```
 
+Após a importação dos arquivos o link para acesso será 
+
+http://localhost/pizzaria-ads/pages/index.php
+
 ---
 
 ## Desenvolvedores
