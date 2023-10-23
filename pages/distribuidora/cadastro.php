@@ -1,3 +1,13 @@
+<?php
+session_start();
+require '../../utils/session.php';
+include '../../utils/verifyAdminUser.php';
+
+if (!verifyAdminUser()) {
+    header('Location: ../../pages/pedidos/cadastro.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -28,7 +38,7 @@
         <label for="telefone"> Telefone para contato:</label>
         <input type="text" step="0.01" id="telefone" name="telefone" required><br>
 
-        <input type="submit" value="Cadastrar Produto">
+        <input type="submit" value="Cadastrar distribuidora">
     </form>
 </body>
 

@@ -1,8 +1,10 @@
 <?php
 session_start();
+require '../../utils/session.php';
 require '../connections/connection.php';
+include '../../utils/verifyAdminUser.php';
 
-if ($_SESSION['user'][4] != 'ADMIN') {
+if (!verifyAdminUser()) {
   header('Location: ../../pages/pedidos/cadastro.php');
 } else {
   $titulo = $_POST['titulo'];
@@ -17,7 +19,7 @@ if ($_SESSION['user'][4] != 'ADMIN') {
   $conn->query($insert);
 
   $conn->close();
-  
+
   echo "<script>
     window.alert('Distribuidora cadastrada com sucesso!')
     window.location.href='../../pages/distribuidora/listagem.php';

@@ -1,8 +1,15 @@
 <?php
+session_start();
+require '../../utils/session.php';
 require('../../controller/connections/connection.php');
+include '../../utils/verifyAdminUser.php';
+
+if (!verifyAdminUser()) {
+    header('Location: ../../pages/pedidos/cadastro.php');
+}
 
 $paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-$totalPorPagina = 2;
+$totalPorPagina = 10;
 $offset = ($paginaAtual - 1) * $totalPorPagina;
 
 $selectTotal = "SELECT COUNT(*) as total FROM `distribuidora`";

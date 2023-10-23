@@ -9,14 +9,20 @@ if (!verifyAdminUser()) {
 } else {
   $id = $_GET['id'];
 
-  $delete = "DELETE FROM distribuidora WHERE `distribuidora`.`id` = $id";
+  $select = "SELECT img FROM produto WHERE `produto`.`id` = $id";
+
+  $img = $conn->query($select)->fetch_row();
+
+  unlink("../../uploadImage/" . $img[0]);
+
+  $delete = "DELETE FROM produto WHERE `produto`.`id` = $id";
 
   $conn->query($delete);
 
   $conn->close();
 
   echo "<script>
-    window.alert('Distribuidora excluída com sucesso!')
-    window.location.href='../../pages/distribuidora/listagem.php';
+    window.alert('Produto excluído com sucesso!')
+    window.location.href='../../pages/produto/listagem.php';
   </script>";
 }
