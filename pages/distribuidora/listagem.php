@@ -1,25 +1,85 @@
+<?php
+require('../../controller/connections/connection.php');
+
+$paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+$totalPorPagina = 2;
+$offset = ($paginaAtual - 1) * $totalPorPagina;
+
+$selectTotal = "SELECT COUNT(*) as total FROM `distribuidora`";
+
+$total_distribuidoras = $conn->query($selectTotal)->fetch_assoc()['total'];
+
+
+$select = "SELECT titulo, cnpj, endereco, telefone, id 
+          FROM `distribuidora` 
+          LIMIT $totalPorPagina OFFSET $offset";
+
+$result = $conn->query($select);
+
+$listaDistribuidora = $result->fetch_all()
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem dos produtos</title>
-</head>
-<body>
-<?php
-// Supondo que a variável $produtos já possui os dados dos produtos cadastrados
-$produtos = array(
-  array("nome" => "Produto 1", "descricao" => "Descrição do produto 1", "preco" => 19.99),
-  array("nome" => "Produto 2", "descricao" => "Descrição do produto 2", "preco" => 29.99),
-  array("nome" => "Produto 3", "descricao" => "Descrição do produto 3", "preco" => 39.99)
-);
 
-//Listagem dos produtos cadastrados
-foreach ($produtos as $produto) {
-  echo "Nome: " . $produto['nome'] . "<br>";
-  echo "Descrição: " . $produto['descricao'] . "<br>";
-  echo "Preço: R$ " . $produto['preco'] . "<br><br>";
-}
-?>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listagem das distribuidoras</title>
+</head>
+
+<body>
+  <h1> Listagem das distribuidoras </h1>
+
+  <a href='cadastro.php'>
+    <button>Cadastrar</button>
+  </a>
+
+
+  <?php
+
+  if (sizeof($listaDistribuidora) > 0) {
+    echo "
+      <table>
+        <tr>
+          <th>Titulo</th>
+          <th>CNPJ</th>
+          <th>Endereço</th>
+          <th>Telefone</th>
+          <th>Ação</th>
+        </tr>
+    ";
+    foreach ($listaDistribuidora as $distribuidora) {
+      echo "
+        <tr>
+          <td>$distribuidora[0]</td>
+          <td>$distribuidora[1]</td>
+          <td>$distribuidora[2]</td>
+          <td>$distribuidora[3]</td>
+          <td>
+            <a href='../../controller/scripts/deletarDistribuidora.php?id=$distribuidora[4]'>
+              <button>Excluir</button>
+            </a>
+          </td>
+        </tr>";
+    }
+
+    echo "</table>";
+  } else {
+    echo "<p>Nenhuma distribuidora encontrada!</p>";
+  }
+
+  $anterior = $paginaAtual - 1;
+  $proximo = $paginaAtual + 1;
+
+  if ($paginaAtual != 1) {
+    echo "<a href='listagem.php?pagina=$anterior'>Anterior</a> ";
+  }
+
+  if (($paginaAtual * $totalPorPagina) < $total_distribuidoras)
+    echo "<a href='listagem.php?pagina=$proximo'>Próximo</a>";
+  ?>
 </body>
+
 </html>

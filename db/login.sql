@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `carrinho` (
   `endereco_entrega` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `forma_pagamento` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
   `tipo_entrega` varchar(8) COLLATE utf8mb4_general_ci NOT NULL,
-  `estado` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `estado` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,''
   `id_cliente` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

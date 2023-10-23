@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         if ($userPassword == $password) {
-            $newUser = [$user[1], $user[2], $user[4], $user[5]];
+            $newUser = [$user[0], $user[1], $user[2], $user[4], $user[5]];
 
             session_start();
 

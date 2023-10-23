@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Cadastro </title>
 </head>
+
 <body>
-    <h1> Cadastro do produto </h1>
-    <form action="cadastrar_produto.php" method="POST">
-    <label for="nome"> Nome do Produto:</label>
-    <input type="text" id="nome" name="nome" required><br>
+    <h1> Cadastro da distribuidora </h1>
 
-    <label for="descricao"> Descrição:</label>
-    <textarea id="descricao" name="descricao" required></textarea><br>
 
-     <label for="preco"> Preço:</label>
-     <input type="number" step="0.01" id="preco" name="preco" required><br>
+    <a href='listagem.php'>
+        <button>Voltar</button>
+    </a>
 
-    <input type="submit" value="Cadastrar Produto">
+    <form action="../../controller/scripts/cadastroDistribuidora.php" method="POST">
+        <label for="titulo"> Titulo da distribuidora:</label>
+        <input type="text" id="titulo" name="titulo" required><br>
+
+        <label for="cnpj"> CNPJ:</label>
+        <input type="text" step="0.01" id="cnpj" name="cnpj" required></input><br>
+
+        <label for="endereco"> Endereço:</label>
+        <input type="text" step="0.01" id="endereco" name="endereco" required><br>
+
+        <label for="telefone"> Telefone para contato:</label>
+        <input type="text" step="0.01" id="telefone" name="telefone" required><br>
+
+        <input type="submit" value="Cadastrar Produto">
     </form>
 </body>
+
 </html>
