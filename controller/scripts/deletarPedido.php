@@ -5,7 +5,7 @@ require '../connections/connection.php';
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
-  header('Location: ../../pages/pedidos.php');
+  header('Location: ../../pages/pedidos/pedidos.php');
 } else {
   $id = $_GET['id'];
 

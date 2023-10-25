@@ -5,7 +5,7 @@ require '../connections/connection.php';
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
-  header('Location: ../../pages/pedidos/cadastro.php');
+  header('Location: ../../pages/pedidos/pedidos.php');
 } else {
   $titulo = $_POST['titulo'];
   $descricao = $_POST['descricao'];
