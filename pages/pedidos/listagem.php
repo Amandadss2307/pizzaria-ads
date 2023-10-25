@@ -5,7 +5,7 @@ require('../../controller/connections/connection.php');
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
-    header('Location: ../../pages/pedidos.php');
+    header('Location: ../../pages/user/index.php');
 }
 
 $paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;

@@ -4,7 +4,7 @@ require '../../utils/session.php';
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
-    header('Location: ../../pages/pedidos.php/cadastro.php');
+    header('Location: ../../pages/user/index.php');
 }
 ?>
 

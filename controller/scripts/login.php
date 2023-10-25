@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_SESSION['user'] = $newUser;
 
-            header('Location: ../../pages/pedidos/cadastro.php');
+            header('Location: ../../pages/index.php');
         }
     }
 
