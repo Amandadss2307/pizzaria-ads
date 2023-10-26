@@ -68,18 +68,18 @@ $listaPedido = $result->fetch_all()
 
     echo "</table>";
   } else {
-    echo "<p>Nenhum pedido encontrad!</p>";
+    echo "<p>Nenhum pedido encontrado!</p>";
   }
 
   $anterior = $paginaAtual - 1;
   $proximo = $paginaAtual + 1;
 
   if ($paginaAtual != 1) {
-    echo "<a href='listagem.php?pagina=$anterior'>Anterior</a> ";
+    echo "<a href='listagemAdmin.php?pagina=$anterior'>Anterior</a> ";
   }
 
   if (($paginaAtual * $totalPorPagina) < $total_pedidos)
-    echo "<a href='listagem.php?pagina=$proximo'>Próximo</a>";
+    echo "<a href='listagemAdmin.php?pagina=$proximo'>Próximo</a>";
   ?>
 </body>
 
