@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <h1>Faça seu pedido</h1>
-    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <form action="../../controller/scripts/cadastroPedido.php" method="POST">
         <label for="produto">Produto:</label>
         <input type="text" name="produto" id="produto" required><br>
 
