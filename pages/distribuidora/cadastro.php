@@ -3,7 +3,7 @@ require '../../utils/navBar.php';
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
-    header('Location: ../../pages/pedidos/pedidos.php');
+    header('Location: ../../pages/inicial/index.php');
 }
 ?>
 

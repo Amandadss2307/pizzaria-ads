@@ -9,14 +9,14 @@ if (!verifyAdminUser()) {
 } else {
   $id = $_GET['id'];
 
-  $delete = "DELETE FROM distribuidora WHERE `distribuidora`.`id` = $id";
+  $update = "UPDATE `pedido` SET `estado` = 'Entregue' WHERE `pedido`.`id` = $id";
 
-  $conn->query($delete);
+  $conn->query($update);
 
   $conn->close();
 
   echo "<script>
-    window.alert('Distribuidora excluída com sucesso!')
-    window.location.href='../../pages/distribuidora/listagem.php';
+    window.alert('Alteração realizada com sucesso!')
+    window.location.href='../../pages/pedidos/listagemAdmin.php';
   </script>";
 }
