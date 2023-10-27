@@ -13,26 +13,31 @@ $listagemProdutos = $result->fetch_all();
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Cadastro do pedido</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Cadastro do pedido</title>
 </head>
 
 <body>
-    <form action="./finalizar.php" method="POST">
-        <?php
-        if (sizeof($listagemProdutos) > 0) {
-            echo "
+
+  <a href='listagem.php'>
+    <button>Voltar</button>
+  </a>
+
+  <form action="./finalizar.php" method="POST">
+    <?php
+    if (sizeof($listagemProdutos) > 0) {
+      echo "
       <table>
         <tr>
           <th> Nome do produto </th>
           <th> Descrição</th>
           <th> Preço</th>
-          <th>Ação</th>
+          <th>Quantidade</th>
         </tr>
     ";
-            foreach ($listagemProdutos as $produto) {
-                echo "
+      foreach ($listagemProdutos as $produto) {
+        echo "
         <tr>
           <td><img src='../../uploadImage/$produto[4]'></td>
           <td>$produto[1]</td>
@@ -44,15 +49,15 @@ $listagemProdutos = $result->fetch_all();
           </td>
           </td>
         </tr>";
-            }
+      }
 
-            echo "</table>";
-        } else {
-            echo "<p>Nenhum pedido encontrado!</p>";
-        }
-        ?>
-        <input type="submit" value="Cadastrar pedido">
-    </form>
+      echo "</table>";
+    } else {
+      echo "<p>Nenhum pedido encontrado!</p>";
+    }
+    ?>
+    <input type="submit" value="Cadastrar pedido">
+  </form>
 
 </body>
 
