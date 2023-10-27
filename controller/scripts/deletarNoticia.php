@@ -9,20 +9,20 @@ if (!verifyAdminUser()) {
 } else {
   $id = $_GET['id'];
 
-  $select = "SELECT img FROM produto WHERE `produto`.`id` = $id";
+  $select = "SELECT img FROM noticia WHERE `noticia`.`id` = $id";
 
   $img = $conn->query($select)->fetch_row();
 
   unlink("../../uploadImage/" . $img[0]);
 
-  $delete = "DELETE FROM produto WHERE `produto`.`id` = $id";
+  $delete = "DELETE FROM noticia WHERE `noticia`.`id` = $id";
 
   $conn->query($delete);
 
   $conn->close();
 
   echo "<script>
-    window.alert('Produto excluído com sucesso!')
-    window.location.href='../../pages/produto/listagem.php';
+    window.alert('Noticia excluído com sucesso!')
+    window.location.href='../../pages/noticias/listagem.php';
   </script>";
 }

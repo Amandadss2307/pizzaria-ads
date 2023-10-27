@@ -1,5 +1,13 @@
 <?php
-require '../../utils/navBar.php'
+require '../../utils/navBar.php';
+require '../../controller/connections/connection.php';
+
+$select = "SELECT * FROM `noticia` ORDER BY data_criacao DESC LIMIT 3";
+
+$result = $conn->query($select);
+
+$listaNoticias = $result->fetch_all();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,21 +21,22 @@ require '../../utils/navBar.php'
 <body>
 
     <main>
-        <div id="post0">
-            <h2>Em breve novidades</h2>
-            <img src="../imagens/Process-rafiki.png" alt="">
-        </div>
-        <div id="post1">
-            <h2>Promoção de Pizza!</h2>
-            <p>O patrão ficou maluco!!!! na compra de 2 pizzas a terceira sai totalmente de graça!!</p>
-            <p>Promoção válida até as 23:59 de hoje.</p>
-            <img src="../imagens/homem-maluco.jpg" alt="homem maluco">
-        </div>
-        <div id="post2">
-            <h2>Venha descobrir como nossas deliciosas pizzas são feitas.</h2>
-            <p>O chef está te esperando para te mostrar como é a nossa cozinha</p>
-            <img src="../imagens/cozinha-pizzaria.jpeg" alt="cozinha de uma pizzaria">
-        </div>
+        <?php
+        $count = -1;
+        foreach ($listaNoticias as $noticia) {
+            $count++;
+            $titulo = $noticia[1];
+            $descricao = $noticia[5];
+            $img = $noticia[3];
+            echo "
+            <div id='post$count'>
+                <h2>$titulo</h2>
+                <p>$descricao</p>
+                <img src='../../uploadImage/$img' alt='$titulo'>
+            </div>";
+        }
+        ?>
+        <br>
         <div id="post3">
             <h2> Conheça nossas redes Sociais</h2>
             <p>Agora estamos com: </p>
@@ -35,7 +44,6 @@ require '../../utils/navBar.php'
             <p class="rs"><i class="fa-brands fa-facebook"></i> Facebook </p>
             <p class="rs"><i class="fa-brands fa-twitter"></i> Twitter</p>
         </div>
-        <button class="prox">1</button>
     </main>
 </body>
 

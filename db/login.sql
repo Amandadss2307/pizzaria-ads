@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 27-Out-2023 às 04:53
+-- Tempo de geração: 27-Out-2023 às 06:57
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.0.26
 
@@ -43,9 +43,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nome`, `email`, `senha`, `telefone`, `tipo_usuario`) VALUES
-(1, 'awdawdawdawdwa', 'showdobts2605@gmail.com', 'dfbe9b84722f27c60aade2595f9f66da', '+5511992281382', 'ADMIN'),
-(2, 'Arianne', 'kimberlysantos2510@gmail.com', 'dfbe9b84722f27c60aade2595f9f66da', '5455555', 'USER'),
-(3, 'Johne ', 'johne.keyvid0@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '+5511966358872', 'ADMIN');
+(1, 'Usuario Teste', 'teste@gmail.com', 'dfbe9b84722f27c60aade2595f9f66da', '+5511998765432', 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -83,13 +81,23 @@ INSERT INTO `distribuidora` (`id`, `titulo`, `cnpj`, `endereco`, `telefone`, `id
 
 DROP TABLE IF EXISTS `noticia`;
 CREATE TABLE IF NOT EXISTS `noticia` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `data` date NOT NULL,
+  `data_criacao` date NOT NULL,
   `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_cliente` int NOT NULL,
+  `descricao` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `noticia`
+--
+
+INSERT INTO `noticia` (`id`, `titulo`, `data_criacao`, `img`, `id_cliente`, `descricao`) VALUES
+(5, 'Em breve novidades', '2023-10-27', '27b6da7ca2646e2c591342df2549a38e.png', 1, 'Em manutenção'),
+(6, 'Promoção de Pizza!', '2022-12-31', '1dcc468d74759e261ccaee320b8df656.jpg', 1, 'O patrão ficou maluco!!!! na compra de 2 pizzas a terceira sai totalmente de graça!!\r\nPromoção válida até as 23:59 de hoje.'),
+(7, '>Venha descobrir como nossas deliciosas pizzas são feitas.', '2021-05-31', 'c62a0d597a175d2b04a1becb5a4991db.jpeg', 1, 'O chef está te esperando para te mostrar como é a nossa cozinha');
 
 -- --------------------------------------------------------
 
@@ -106,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `estado` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_cliente` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -122,15 +130,16 @@ CREATE TABLE IF NOT EXISTS `produto` (
   `preco` int NOT NULL,
   `img` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
 INSERT INTO `produto` (`id`, `titulo`, `descricao`, `preco`, `img`) VALUES
-(12, 'Pizza de queijo', 'queijo, tomate, etc', 19, '2b3b4acd269aaf01e5ec6407df99b14b.jpg'),
-(11, 'Pizza de mussarela', 'queijo, tomate, etc', 45, 'e04c2b9d6e0b7890aa73027f26cf10a5.jpg');
+(13, 'Pizza de mussarela', 'queijo, tomate, etc', 32, '26f736ef99001cc5807ac1610c842d23.jpg'),
+(14, 'Coca 2L', 'Diabetes garantida :D', 13, '3d2c6cc96631fedb439fae78b71d7d51.jpg'),
+(15, 'Esfiha de queijo', 'Queijo', 3, 'ddef27a377821c7aff9bace2ad38f0d0.jpg');
 
 -- --------------------------------------------------------
 
@@ -145,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `produto_pedido` (
   `id_pedido` int NOT NULL,
   `qntd` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

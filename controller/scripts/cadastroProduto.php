@@ -5,7 +5,7 @@ require '../connections/connection.php';
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
-    header('Location: ../../pages/pedidos/pedidos.php');
+  header('Location: ../../pages/inicial/index.php');
 } else {
 
     $target_dir = "../../uploadImage/";

@@ -11,18 +11,18 @@ $paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 $totalPorPagina = 10;
 $offset = ($paginaAtual - 1) * $totalPorPagina;
 
-$selectTotal = "SELECT COUNT(*) as total FROM `distribuidora`";
+$selectTotal = "SELECT COUNT(*) as total FROM `noticia`";
 
-$total_distribuidoras = $conn->query($selectTotal)->fetch_assoc()['total'];
+$total_noticias = $conn->query($selectTotal)->fetch_assoc()['total'];
 
 
-$select = "SELECT titulo, cnpj, endereco, telefone, id 
-          FROM `distribuidora` 
+$select = "SELECT titulo, data_criacao, img, id_cliente, descricao, id
+          FROM `noticia` 
           LIMIT $totalPorPagina OFFSET $offset";
 
 $result = $conn->query($select);
 
-$listaDistribuidora = $result->fetch_all()
+$listaNoticia = $result->fetch_all()
 
 ?>
 
@@ -32,11 +32,11 @@ $listaDistribuidora = $result->fetch_all()
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Listagem das distribuidoras</title>
+  <title>Listagem das noticias</title>
 </head>
 
 <body>
-  <h1> Listagem das distribuidoras </h1>
+  <h1> Listagem das noticias </h1>
 
   <a href='cadastro.php'>
     <button>Cadastrar</button>
@@ -45,26 +45,27 @@ $listaDistribuidora = $result->fetch_all()
 
   <?php
 
-  if (sizeof($listaDistribuidora) > 0) {
+  if (sizeof($listaNoticia) > 0) {
     echo "
       <table>
         <tr>
           <th>Titulo</th>
-          <th>CNPJ</th>
-          <th>Endereço</th>
-          <th>Telefone</th>
+          <th>Data</th>
+          <th>img</th>
+          <th>Descrição</th>
           <th>Ação</th>
         </tr>
     ";
-    foreach ($listaDistribuidora as $distribuidora) {
+    foreach ($listaNoticia as $noticia) {
       echo "
         <tr>
-          <td>$distribuidora[0]</td>
-          <td>$distribuidora[1]</td>
-          <td>$distribuidora[2]</td>
-          <td>$distribuidora[3]</td>
+          <td>$noticia[0]</td>
+          <td>$noticia[1]</td>
+          <td>$noticia[2]</td>
+          <td>$noticia[3]</td>
+          <td>$noticia[4]</td>
           <td>
-            <a href='../../controller/scripts/deletarDistribuidora.php?id=$distribuidora[4]'>
+            <a href='../../controller/scripts/deletarNoticia.php?id=$noticia[5]'>
               <button>Excluir</button>
             </a>
           </td>
@@ -73,7 +74,7 @@ $listaDistribuidora = $result->fetch_all()
 
     echo "</table>";
   } else {
-    echo "<p>Nenhuma distribuidora encontrada!</p>";
+    echo "<p>Nenhuma noticia encontrada!</p>";
   }
 
   $anterior = $paginaAtual - 1;
@@ -83,7 +84,7 @@ $listaDistribuidora = $result->fetch_all()
     echo "<a href='listagem.php?pagina=$anterior'>Anterior</a> ";
   }
 
-  if (($paginaAtual * $totalPorPagina) < $total_distribuidoras)
+  if (($paginaAtual * $totalPorPagina) < $total_noticias)
     echo "<a href='listagem.php?pagina=$proximo'>Próximo</a>";
   ?>
 </body>
