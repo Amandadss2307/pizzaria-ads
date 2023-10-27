@@ -2,26 +2,40 @@
 session_start();
 require '../../utils/session.php';
 require '../connections/connection.php';
-include '../../utils/verifyAdminUser.php';
 
-if (!verifyAdminUser()) {
-  header('Location: ../../pages/pedidos/pedidos.php');
-} else {
-  $endereco_entrega = $_POST['endereco_entrega'];
-  $forma_pagamento = $_POST['forma_pagamento'];
-  $tipo_entrega = $_POST['tipo_entrega'];
-  $estado = 'pendente';
-  $id_cliente = $_SESSION['user'][0];
+$endereco_entrega = $_POST['endereco_entrega'];
+$forma_pagamento = $_POST['forma_pagamento'];
+$tipo_entrega = $_POST['tipo_entrega'];
 
-  $insert = "INSERT INTO `pedido` (`id`, `endereco_entrega`, `forma_pagamento`, `tipo_entrega`, `estado`, `id_cliente`) 
+$estado = 'pendente';
+$id_cliente = $_SESSION['user'][0];
+
+$insert = "INSERT INTO `pedido` (`id`, `endereco_entrega`, `forma_pagamento`, `tipo_entrega`, `estado`, `id_cliente`) 
               VALUES (NULL, '$endereco_entrega', '$forma_pagamento', '$tipo_entrega', '$estado', '$id_cliente');";
 
-  $conn->query($insert);
+$result = $conn->query($insert);
 
-  $conn->close();
+$id_pedido = $conn->insert_id;
 
-  echo "<script>
-    window.alert('Pedido cadastrado com sucesso!')
-    window.location.href='../../pages/pedidos/listagem.php';
-  </script>";
+print_r($_SESSION['produtos']);
+echo $id_pedido;
+
+foreach ($_SESSION['produtos'] as $produto) {
+  $id_produto = $produto['id'];
+  $qntd = $produto['qntd'];
+
+  $insert_produto_pedido = "INSERT INTO produto_pedido (`id`, `id_produto`, `id_pedido`, `qntd`) 
+                            VALUES (NULL, '$id_produto', '$id_pedido', '$qntd')";
+
+  echo $insert_produto_pedido;
+
+  $conn->query($insert_produto_pedido);
 }
+
+// $_SESSION['produtos'] = [];
+$conn->close();
+
+// echo "<script>
+//     window.alert('Pedido cadastrado com sucesso!')
+//     window.location.href='../../pages/pedidos/listagem.php';
+//   </script>";

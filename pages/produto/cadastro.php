@@ -1,6 +1,5 @@
 <?php
-session_start();
-require '../../utils/session.php';
+require '../../utils/navBar.php';
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
@@ -27,8 +26,8 @@ if (!verifyAdminUser()) {
         <label for="titulo"> Titulo do produto:</label>
         <input type="text" id="titulo" name="titulo" required><br>
 
-        <label for= "imagem" >Imagem</label>
-        <input type= "file" id="imagem" name= "imagem" required><br>
+        <label for="imagem">Imagem</label>
+        <input type="file" id="imagem" name="imagem" required><br>
 
         <label for="descricao"> Descrição:</label>
         <input type="text" step="0.01" id="descricao" name="descricao" required></input><br>

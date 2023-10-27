@@ -1,6 +1,5 @@
 <?php
-session_start();
-require '../../utils/session.php';
+require '../../utils/navBar.php';
 require('../../controller/connections/connection.php');
 include '../../utils/verifyAdminUser.php';
 

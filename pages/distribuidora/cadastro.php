@@ -1,6 +1,5 @@
 <?php
-session_start();
-require '../../utils/session.php';
+require '../../utils/navBar.php';
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {

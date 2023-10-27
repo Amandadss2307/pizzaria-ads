@@ -1,5 +1,7 @@
 <?php
-session_start();
+require '../../utils/navBar.php';
+require('../../controller/connections/connection.php');
+
 $paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 $totalPorPagina = 10;
 $offset = ($paginaAtual - 1) * $totalPorPagina;
@@ -15,7 +17,7 @@ $select = "SELECT endereco_entrega, forma_pagamento, tipo_entrega, estado, id_cl
 
 $result = $conn->query($select);
 
-$listaPedido = $result->fetch_all()
+$listaPedidos = $result->fetch_all()
 
 ?>
 
@@ -43,7 +45,7 @@ $listaPedido = $result->fetch_all()
           <th>Ação</th>
         </tr>
     ";
-    foreach ($listaPedido as $pedido) {
+    foreach ($listaPedidos as $pedido) {
       echo "
         <tr>
           <td>$pedido[0]</td>
