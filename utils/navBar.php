@@ -13,5 +13,5 @@ require '../../utils/session.php';
         <a href="../pedidos/listagem.php">Historico de pedidos</a> <!-- Para o historico de pedidos-->
     </nav>
     <span><i class="fa-brands fa-whatsapp"></i></span>
-    <button id="desconect"><a href="../controller/scripts/logout.php"> Desconectar <i class="fa-solid fa-right-from-bracket"></i></a></button> <!-- Desconectar -->
+    <button id="desconect"><a href="../../controller/scripts/logout.php"> Desconectar <i class="fa-solid fa-right-from-bracket"></i></a></button> <!-- Desconectar -->
 </header>

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_SESSION['user'] = $newUser;
 
-            header('Location: ../../pages/index.php');
+            header('Location: ../../pages/inicial/index.php');
         }
     }
 

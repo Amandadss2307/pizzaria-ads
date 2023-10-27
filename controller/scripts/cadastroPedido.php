@@ -7,7 +7,7 @@ $endereco_entrega = $_POST['endereco_entrega'];
 $forma_pagamento = $_POST['forma_pagamento'];
 $tipo_entrega = $_POST['tipo_entrega'];
 
-$estado = 'pendente';
+$estado = 'Preparando';
 $id_cliente = $_SESSION['user'][0];
 
 $insert = "INSERT INTO `pedido` (`id`, `endereco_entrega`, `forma_pagamento`, `tipo_entrega`, `estado`, `id_cliente`) 
@@ -16,9 +16,6 @@ $insert = "INSERT INTO `pedido` (`id`, `endereco_entrega`, `forma_pagamento`, `t
 $result = $conn->query($insert);
 
 $id_pedido = $conn->insert_id;
-
-print_r($_SESSION['produtos']);
-echo $id_pedido;
 
 foreach ($_SESSION['produtos'] as $produto) {
   $id_produto = $produto['id'];
@@ -32,10 +29,10 @@ foreach ($_SESSION['produtos'] as $produto) {
   $conn->query($insert_produto_pedido);
 }
 
-// $_SESSION['produtos'] = [];
+$_SESSION['produtos'] = [];
 $conn->close();
 
-// echo "<script>
-//     window.alert('Pedido cadastrado com sucesso!')
-//     window.location.href='../../pages/pedidos/listagem.php';
-//   </script>";
+echo "<script>
+     window.alert('Pedido cadastrado com sucesso!')
+     window.location.href='../../pages/pedidos/listagem.php';
+  </script>";

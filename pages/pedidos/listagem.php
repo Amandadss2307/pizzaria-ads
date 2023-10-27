@@ -2,75 +2,64 @@
 require '../../utils/navBar.php';
 require('../../controller/connections/connection.php');
 
-$paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-$totalPorPagina = 10;
-$offset = ($paginaAtual - 1) * $totalPorPagina;
+$id_cliente = $_SESSION['user'][0];
 
-$selectTotal = "SELECT COUNT(*) as total FROM `pedido`";
+$sql = "SELECT 
+          p.id as id_pedido, 
+          p.endereco_entrega, 
+          p.tipo_entrega, 
+          p.estado,
+          pr.titulo, 
+          pr.descricao, 
+          pr.preco, 
+          pp.qntd, 
+          (pr.preco * pp.qntd) as preco_total
+      FROM 
+          pedido p
+      JOIN 
+          produto_pedido pp ON p.id = pp.id_pedido
+      JOIN 
+          produto pr ON pp.id_produto = pr.id
+      WHERE 
+          id_cliente = $id_cliente";
 
-$total_pedidos = $conn->query($selectTotal)->fetch_assoc()['total'];
+$result = $conn->query($sql);
 
 
-$select = "SELECT endereco_entrega, forma_pagamento, tipo_entrega, estado, id_cliente, id
-          FROM `pedido` 
-          LIMIT $totalPorPagina OFFSET $offset";
+echo "<a href='cadastro.php'>
+  <button>Cadastrar</button>
+</a>";
 
-$result = $conn->query($select);
+if ($result->num_rows > 0) {
+  $pedido_atual = null;
+  $preco_final_pedido = 0;
 
-$listaPedidos = $result->fetch_all()
+  while ($row = $result->fetch_assoc()) {
 
-?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Listagem dos pedidos</title>
-</head>
-
-<body>
-  <h1> Listagem dos pedidos </h1>
-  <?php
-
-  if (sizeof($listaPedidos) > 0) {
-    echo "
-      <table>
-        <tr>
-          <th> Endereço de entrega</th>
-          <th> Forma de pagamento</th>
-          <th> Tipo de entrega</th>
-          <th> Estado</th>
-          <th>Ação</th>
-        </tr>
-    ";
-    foreach ($listaPedidos as $pedido) {
-      echo "
-        <tr>
-          <td>$pedido[0]</td>
-          <td>$pedido[1]</td>
-          <td>$pedido[2]</td>
-          <td>$pedido[3]</td>
-          </td>
-        </tr>";
+    if ($row["id_pedido"] != $pedido_atual) {
+      if ($pedido_atual !== null) {
+        echo "<p>Preço Final do Pedido: " . $preco_final_pedido . "</p>";
+      }
+      echo "<h2>Pedido #" . $row["id_pedido"] . "</h2>";
+      echo "<p>Endereço de Entrega: " . $row["endereco_entrega"] . "</p>";
+      echo "<p>Tipo de Entrega: " . $row["tipo_entrega"] . "</p>";
+      echo "<strong><p>Estado atual do pedido: " . $row["estado"] . "</p></strong>";
+      $pedido_atual = $row["id_pedido"];
+      $preco_final_pedido = 0;
     }
 
-    echo "</table>";
-  } else {
-    echo "<p>Nenhum pedido encontrado!</p>";
+    echo "<p>Título do Produto: " . $row["titulo"] . "</p>";
+    echo "<p>Descrição do Produto: " . $row["descricao"] . "</p>";
+    echo "<p>Preço do Produto: " . $row["preco"] . "</p>";
+    echo "<p>Quantidade: " . $row["qntd"] . "</p>";
+    echo "<p>Preço Total: " . $row["preco_total"] . "</p>";
+
+    $preco_final_pedido += $row["preco_total"];
   }
 
-  $anterior = $paginaAtual - 1;
-  $proximo = $paginaAtual + 1;
+  echo "<p>Preço Final do Pedido: " . $preco_final_pedido . "</p>";
+} else {
+  echo "Nenhum resultado encontrado.";
+}
 
-  if ($paginaAtual != 1) {
-    echo "<a href='listagem.php?pagina=$anterior'>Anterior</a> ";
-  }
-
-  if (($paginaAtual * $totalPorPagina) < $total_pedidos)
-    echo "<a href='listagem.php?pagina=$proximo'>Próximo</a>";
-  ?>
-</body>
-
-</html>
+$conn->close();
