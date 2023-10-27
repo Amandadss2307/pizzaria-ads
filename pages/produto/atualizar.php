@@ -1,11 +1,10 @@
 <?php
-session_start();
-require '../../utils/session.php';
+require '../../utils/navBar.php';
 require '../../controller/connections/connection.php';
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
-    header('Location: ../../pages/pedidos/cadastro.php');
+    header('Location: ../../pages/user/index.php');
 }
 
 $id = $_GET['id'];
@@ -26,7 +25,6 @@ $pedido = $result->fetch_row();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Atualizar </title>
 </head>
-
 <body>
     <h1> Atualizar produto </h1>
     <a href='listagem.php'>

@@ -1,11 +1,10 @@
 <?php
-session_start();
-require '../../utils/session.php';
+require '../../utils/navBar.php';
 require('../../controller/connections/connection.php');
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
-    header('Location: ../../pages/pedidos/cadastro.php');
+    header('Location: ../../pages/pedidos/pedidos.php');
 }
 
 $paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;

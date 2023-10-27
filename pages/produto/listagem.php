@@ -1,11 +1,11 @@
 <?php
-session_start();
-require '../../utils/session.php';
+require '../../utils/navBar.php';
+
 require('../../controller/connections/connection.php');
 include '../../utils/verifyAdminUser.php';
 
 if (!verifyAdminUser()) {
-    header('Location: ../../pages/pedidos/cadastro.php');
+  header('Location: ../../pages/user/index.php');
 }
 
 $paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
@@ -31,22 +31,22 @@ $listaProduto = $result->fetch_all()
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem dos produtos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listagem dos produtos</title>
 </head>
 
 <body>
-    <h1> Listagem dos produtos </h1>
+  <h1> Listagem dos produtos </h1>
 
-    <a href='cadastro.php'>
-        <button>Cadastrar</button>
-    </a>
+  <a href='cadastro.php'>
+    <button>Cadastrar</button>
+  </a>
 
-    <?php
+  <?php
 
-    if (sizeof($listaProduto) > 0) {
-        echo "
+  if (sizeof($listaProduto) > 0) {
+    echo "
       <table>
         <tr>
           <th>Foto</th>
@@ -56,8 +56,8 @@ $listaProduto = $result->fetch_all()
           <th>Ação</th>
         </tr>
     ";
-        foreach ($listaProduto as $produto) {
-            echo "
+    foreach ($listaProduto as $produto) {
+      echo "
         <tr>
           <td><img src='../../uploadImage/$produto[4]' alt='Foto do produto'></td>
           <td>$produto[0]</td>
@@ -72,23 +72,23 @@ $listaProduto = $result->fetch_all()
             </a>
           </td>
         </tr>";
-        }
-
-        echo "</table>";
-    } else {
-        echo "<p>Nenhum produto encontrado!</p>";
     }
 
-    $anterior = $paginaAtual - 1;
-    $proximo = $paginaAtual + 1;
+    echo "</table>";
+  } else {
+    echo "<p>Nenhum produto encontrado!</p>";
+  }
 
-    if ($paginaAtual != 1) {
-        echo "<a href='listagem.php?pagina=$anterior'>Anterior</a> ";
-    }
+  $anterior = $paginaAtual - 1;
+  $proximo = $paginaAtual + 1;
 
-    if (($paginaAtual * $totalPorPagina) < $total_produto)
-        echo "<a href='listagem.php?pagina=$proximo'>Próximo</a>";
-    ?>
+  if ($paginaAtual != 1) {
+    echo "<a href='listagem.php?pagina=$anterior'>Anterior</a> ";
+  }
+
+  if (($paginaAtual * $totalPorPagina) < $total_produto)
+    echo "<a href='listagem.php?pagina=$proximo'>Próximo</a>";
+  ?>
 </body>
 
 </html>

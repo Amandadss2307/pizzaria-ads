@@ -24,8 +24,6 @@ require '../../utils/initalSession.php';
             <label for="senha"><i class="fa-solid fa-lock"></i></label>
             <input type="password" name="senha" id="senha" placeholder="********" required minlength="6" maxlength="24">
             <br><br>
-            <a href="esqueci-senha" id="esqueci-senha">Esqueci a senha</a>
-            <br><br>
             <input type="submit" value="Entrar">
             <br><br>
             <a href="cadastro.php" id="cadastro">Cadastre-se</a>

@@ -9,20 +9,14 @@ if (!verifyAdminUser()) {
 } else {
   $id = $_GET['id'];
 
-  $select = "SELECT img FROM produto WHERE `produto`.`id` = $id";
-
-  $img = $conn->query($select)->fetch_row();
-
-  unlink("../../uploadImage/" . $img[0]);
-
-  $delete = "DELETE FROM produto WHERE `produto`.`id` = $id";
+  $delete = "DELETE FROM pedido WHERE `pedido`.`id` = $id";
 
   $conn->query($delete);
 
   $conn->close();
 
   echo "<script>
-    window.alert('Produto excluído com sucesso!')
-    window.location.href='../../pages/produto/listagem.php';
+    window.alert('Pedido excluído com sucesso!')
+    window.location.href='../../pages/pedidos/listagem.php';
   </script>";
 }
