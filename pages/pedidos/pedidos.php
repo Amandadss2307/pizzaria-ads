@@ -3,19 +3,6 @@ session_start();
 require '../../utils/session.php';
 require('../../controller/connections/connection.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $produto = $_POST['produto'];
-    $quantidade = $_POST['quantidade'];
-    $endereco_entrega = $_POST['endereco_entrega'];
-    $forma_pagamento = $_POST['forma_pagamento'];
-    $tipo_entrega = $_POST['tipo_entrega'];
-    $observacoes = $_POST['observacoes'];
-
-    echo "Pedido Recebido:<br>";
-    echo "Produto: $produto<br>";
-    echo "Quantidade: $quantidade<br>";
-    echo "Observações: $observacoes<br>";
-}
 ?>
 
 <!DOCTYPE html>

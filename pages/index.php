@@ -1,7 +1,6 @@
 <?php
 include '../utils/logout.php';
 session_start();
-logout()
 ?>
 
 <!DOCTYPE html>
